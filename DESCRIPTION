@@ -11,8 +11,10 @@ Description: Utility tools for rstudio running in container environments.
 License: AGPL
 Encoding: UTF-8
 LazyData: true
+Depends:
+
 Imports:
-        readr,
         shiny,
-        miniUI
+        miniUI,
+        readr
 RoxygenNote: 6.1.1
