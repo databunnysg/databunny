@@ -5,32 +5,31 @@
 #' Click Addins -> Databunny -> "Show CPU Memory Usage Limit" to activate addin
 #' @export
 #'
-cpuMemoryRstudioAddins<-function(){
 
+usageaddins<-function(){
 
-  ui<-miniPage({
-    gadgetTitleBar("Container Status")
-    miniContentPanel(
-      tableOutput("stats")
+  ui<-miniUI::miniPage({
+    miniUI::miniContentPanel(
+      shiny::tableOutput("stats")
     )
   })
   server<-function(input, output, session) {
-    observe({
-      invalidateLater(1000)
+    shiny::observe({
+      shiny::invalidateLater(1000)
       memlimit<-system("cat /sys/fs/cgroup/memory/memory.limit_in_bytes",intern = TRUE)
       memused<-system("cat /sys/fs/cgroup/memory/memory.usage_in_bytes",intern = TRUE)
       cpu<-system("top -bn1",intern = TRUE)
-      cpudt<-read_table(cpu[-(1:6)])
+      cpudt<-readr::read_table(cpu[-(1:6)])
       cpuusage<-paste0(sum(cpudt$`%CPU`),"%")
       statsdt<-data.frame("MemoryUsed"=paste(round(as.numeric(memused)/(1024*1024*1024),digits = 2),"GB"),"MemoryLimit"=paste(round(as.numeric(memlimit)/(1024*1024*1024),digits = 2),"GB"),"CPUUsage"=cpuusage)
       output$stats<-renderTable(statsdt)
     })
-    observeEvent(input$done, {
+    shiny::observeEvent(input$done, {
       stopApp()
     })
   }
-  viewer <- paneViewer()
-  runGadget(ui, server, viewer = viewer)
+  viewer <- shiny::paneViewer()
+  shiny::runGadget(ui, server, viewer = viewer)
 }
 
 #' Query CPU usage from OS
@@ -40,7 +39,7 @@ cpuMemoryRstudioAddins<-function(){
 #'
 getCPUUsage<-function(){
   cpu<-system("top -bn1",intern = TRUE)
-  cpudt<-read_table(cpu[-(1:6)])
+  cpudt<-readr::read_table(cpu[-(1:6)])
   cpuusage<-paste0(sum(cpudt$`%CPU`),"%")
   return(cpuusage)
 }

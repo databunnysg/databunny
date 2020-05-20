@@ -11,8 +11,6 @@ Description: Utility tools for rstudio running in container environments.
 License: AGPL
 Encoding: UTF-8
 LazyData: true
-Depends:
-
 Imports:
         shiny,
         miniUI,
