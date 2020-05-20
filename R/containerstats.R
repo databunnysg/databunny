@@ -1,7 +1,3 @@
-library(readr)
-library(miniUI)
-library(shiny)
-
 
 #' Rstudio addin function query CPU and Memory usage and limit by docker container and show it on a viewer pane
 #' 
