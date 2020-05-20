@@ -14,5 +14,5 @@ LazyData: true
 Imports:
         readr,
         shiny,
-        miniUI,
+        miniUI
 RoxygenNote: 6.1.1
