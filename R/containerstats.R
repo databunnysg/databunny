@@ -3,13 +3,13 @@ library(miniUI)
 library(shiny)
 
 
-#' Query CPU and Memory usage and limit by docker container and show it on a Viewer Pane
+#' Rstudio addin function query CPU and Memory usage and limit by docker container and show it on a viewer pane
 #' 
 #' This is rstudio addin function, the addin will be automatically added to rstudio once packege was installed
 #' Click Addins -> Databunny -> "Show CPU Memory Usage Limit" to activate addin
 #' @export
 #'
-updatecpumemstats<-function(){
+cpuMemoryRstudioAddins<-function(){
 
 
   ui<-miniPage({
