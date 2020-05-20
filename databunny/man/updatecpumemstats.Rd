@@ -2,10 +2,14 @@
 % Please edit documentation in R/containerstats.R
 \name{updatecpumemstats}
 \alias{updatecpumemstats}
-\title{Query CPU and Memory usage and limit by docker container and show it on a Viewer Pane}
+\title{Query CPU and Memory usage and limit by docker container and show it on a Viewer Pane
+This is rstudio addin function, the addin will be automatically added to rstudio once packege was installed
+Click Addins -> Databunny -> "Show CPU Memory Usage Limit" to activate addin}
 \usage{
 updatecpumemstats()
 }
 \description{
 Query CPU and Memory usage and limit by docker container and show it on a Viewer Pane
+This is rstudio addin function, the addin will be automatically added to rstudio once packege was installed
+Click Addins -> Databunny -> "Show CPU Memory Usage Limit" to activate addin
 }
