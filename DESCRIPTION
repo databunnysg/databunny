@@ -1,5 +1,5 @@
 Package: databunny
-Title: What the Package Does (One Line, Title Case)
+Title: Rstudio docker container utility
 Version: 0.1.0
 Authors@R: 
     person(given = "Yi",
