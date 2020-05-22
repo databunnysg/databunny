@@ -28,6 +28,6 @@
 #' @export
 #'
 disconnectAutoReload<-function(){
-  jsCodeDisconnectAutoReconnect <- paste0('setInterval(() => {if($(\":contains(\'Disconnected from the server.\')").length>0) { $.get("/",function(data,status){if(status=="success") window.location.reload(true) })   }  }, 1000);')
+  jsCodeDisconnectAutoReconnect <- paste0('setInterval(() => {if($(\":contains(\'Disconnected from the server.\')").length>0) { $.get(window.location.href,function(data,status){if(status=="success") window.location.reload(true) })   }  }, 1000);')
   shinyjs::runjs(jsCodeDisconnectAutoReconnect)  
 }
