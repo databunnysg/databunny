@@ -1,5 +1,5 @@
 Package: databunny
-Title: Rstudio docker container utility
+Title: Collection of Utility tools from databunny
 Version: 0.1.0
 Authors@R: 
     person(given = "Yi",
@@ -7,12 +7,13 @@ Authors@R:
            role = c("aut", "cre"),
            email = "yi@databunny.sg",
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: Utility tools for rstudio running in container environments.
+Description: Utility tools for shiny, rstudio running in production environments
 License: AGPL
 Encoding: UTF-8
 LazyData: true
 Imports:
         shiny,
+        shinyjs,
         miniUI,
         readr
 RoxygenNote: 6.1.1
