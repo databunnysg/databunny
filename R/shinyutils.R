@@ -5,7 +5,10 @@
 #' This is annoying and user has to click the "Reload" button to reconnect to server.
 #' This function helps automatically reconnect and reload application whenever network is available again. Check in 1 second period.
 #' 
-#' Usage: add disconnectAutoReload() to shiny server(session,input,output)
+#' 
+#' Add disconnectAutoReload() to shiny server(session,input,output)
+#' 
+#' \preformatted{
 #' 
 #' library(shiny)
 #' library(shinyjs)
@@ -21,7 +24,7 @@
 #' }
 #' 
 #' shinyApp(ui = ui, server = server)
-
+#' }
 #' @export
 #'
 disconnectAutoReload<-function(){
