@@ -16,13 +16,10 @@ usageaddins<-function(){
   server<-function(input, output, session) {
     shiny::observe({
       shiny::invalidateLater(1000)
-      memlimit<-min(as.numeric(system("cat /sys/fs/cgroup/memory/memory.limit_in_bytes",intern = TRUE)),as.numeric(system("awk '/MemTotal/ {print $2}' /proc/meminfo", intern=TRUE))*1024)
-      as.numeric(system("awk '/MemTotal/ {print $2}' /proc/meminfo", intern=TRUE))
-      memused<-system("cat /sys/fs/cgroup/memory/memory.usage_in_bytes",intern = TRUE)
-      cpu<-system("top -bn1",intern = TRUE)
-      cpudt<-readr::read_table(cpu[-(1:6)])
-      cpuusage<-paste0(sum(cpudt$`%CPU`),"%")
-      statsdt<-data.frame("MemoryUsed"=paste(round(as.numeric(memused)/(1024*1024*1024),digits = 2),"GB"),"MemoryLimit"=paste(round(as.numeric(memlimit)/(1024*1024*1024),digits = 2),"GB"),"CPUUsage"=cpuusage)
+      memlimit<-getMemoryLimit()
+      memused<-getMemoryUsage()
+      cpuusage<-paste0(getCPUUsage(),"%")
+      statsdt<-data.frame("MemoryUsed"=paste(memused,"GB"),"MemoryLimit"=paste(memlimit,"GB"),"CPUUsage"=cpuusage)
       output$stats<-renderTable(statsdt)
     })
     shiny::observeEvent(input$done, {
