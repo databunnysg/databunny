@@ -86,7 +86,7 @@ getCPUUsage<-function(){
   {
     cpu<-system("top -bn1",intern = TRUE)
     cpudt<-readr::read_table(cpu[-(1:6)])
-    cpuusage<-paste0(sum(cpudt$`%CPU`),"%")  
+    cpuusage<-paste0(sum(cpudt$`%CPU`))  
   }
   if(windows)
   {
