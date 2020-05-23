@@ -11,3 +11,4 @@ go to rstudio->addins->Show CPU Memory Usage Limit
 
 CPU Memory Usage and limit shows on viewer pane in background job.
 
+![Image description](https://github.com/databunnysg/databunny/raw/master/man/cpumemoryusage.png)
