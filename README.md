@@ -1,7 +1,7 @@
 Databunny package is a utility package contains utility functions that is helping rstudio users, shiny developer day to day life.
 
 Features:
-1. CPU Memory Usage/Limit rstudio addins
+1. CPU Memory Usage/Limit rstudio addins. Support windows, linux and container environment.
 2. Shiny application disconnection auto reload.
 
 Install databunny library from github
