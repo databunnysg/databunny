@@ -1,5 +1,5 @@
 Name: Show CPU Memory Usage Limit
 Description: Show CPU Memory usage and limit inside docker container.
-Binding: usageaddins
+Binding: runCPUMemoryApp
 Interactive: true
 

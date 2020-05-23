@@ -1,0 +1,2 @@
+library(databunny)
+runCPUMemoryApp()

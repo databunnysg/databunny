@@ -15,5 +15,6 @@ Imports:
         shiny,
         shinyjs,
         miniUI,
+        rstudioapi,
         readr
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.0

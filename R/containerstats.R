@@ -1,21 +1,31 @@
 
-#' Rstudio addin function query CPU and Memory usage and limit by docker container and show it on a viewer pane
+
+#' Shiny app that display CPU and Memory usage and limit by docker container
 #' 
-#' This is rstudio addin function, the addin will be automatically added to rstudio once packege was installed
-#' Click Addins -> Databunny -> "Show CPU Memory Usage Limit" to activate addin
+#' This app runs on default port 56000
 #' @export
 #'
-
-usageaddins<-function(){
+usageshinyapp<-function(){
 
   ui<-miniUI::miniPage({
     miniUI::miniContentPanel(
       shiny::tableOutput("stats")
     )
   })
+  
+  #ui<-shiny::fluidPage({
+  #    shiny::tableOutput("stats")
+  #})
   server<-function(input, output, session) {
+    linux <- Sys.info()['sysname'] == "Linux"
+    windows <- Sys.info()['sysname'] == "Windows"
+    refreshtime<-3000
+    
+    if(windows) refreshtime<-10000
+    if(linux) refreshtime<-2000
+    
     shiny::observe({
-      shiny::invalidateLater(1000)
+      shiny::invalidateLater(refreshtime)
       memlimit<-getMemoryLimit()
       memused<-getMemoryUsage()
       cpuusage<-paste0(getCPUUsage(),"%")
@@ -27,9 +37,43 @@ usageaddins<-function(){
     })
   }
   viewer <- shiny::paneViewer()
-  shiny::runGadget(ui, server, viewer = viewer)
+  app<- shiny::shinyApp(ui,server)
+  shiny::runApp(app,port = 56000, quiet=TRUE)
 }
 
+#' Run shiny app that display CPU and Memory usage and limit by docker container as rstudio job and display it on view pane
+#' 
+#' This is rstudio addin function, the addin will be automatically added to rstudio once packege was installed
+#' Click Addins -> Databunny -> "Show CPU Memory Usage Limit" to activate addin
+#'
+#' The backend shiny app runs on default port 56000 as a rstudio job
+#' @export
+#'
+runCPUMemoryApp<-function()
+{
+  library(rstudioapi)
+  
+  #Generate job script code
+  sink(file=paste0(tempdir(),"\\usageAddinsScript.R"),append = FALSE)
+  cat("library(databunny)\n")
+  cat("usageshinyapp()\n")
+  sink()
+  
+  #run job script
+  
+  jobRunScript(
+    path=paste0(tempdir(),"\\usageAddinsScript.R"),
+    name = "CPU Memory Usage" ,
+    encoding = "unknown",
+    workingDir = NULL,
+    importEnv = TRUE,
+    exportEnv = ""
+  )
+  cat(rstudioapi::isAvailable())
+  
+  #shiny app in rstudio view pane
+  rstudioapi::callFun("viewer", "http://localhost:56000")
+}
 #' Query CPU usage from OS
 #' 
 #' This is Linux command
