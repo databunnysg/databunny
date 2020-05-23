@@ -24,9 +24,8 @@ Use this one line of code will auto reconnect shiny page when ever network avaia
 
 disconnectAutoReload() into shiny server block.
 
-Example.
-
-`
+Example
+```
 library(shiny)
 library(shinyjs)
 library(databunny)
@@ -41,4 +40,4 @@ disconnectAutoReload()
 }
 
 shinyApp(ui = ui, server = server)
-`
+```
