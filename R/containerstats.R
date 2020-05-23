@@ -36,9 +36,13 @@ usageshinyapp<-function(){
       stopApp()
     })
   }
+  
   viewer <- shiny::paneViewer()
   app<- shiny::shinyApp(ui,server)
-  shiny::runApp(app,port = 56000, quiet=TRUE)
+  linux <- Sys.info()['sysname'] == "Linux"
+  windows <- Sys.info()['sysname'] == "Windows"
+  if(windows) shiny::runApp(app,port = 56000, quiet=TRUE)
+  if(linux) shiny::runApp(app,port = 56000, quiet=TRUE)
 }
 
 #' Run shiny app that display CPU and Memory usage and limit by docker container as rstudio job and display it on view pane
@@ -71,7 +75,10 @@ runCPUMemoryApp<-function()
   )
   cat(rstudioapi::isAvailable())
   
+  linux <- Sys.info()['sysname'] == "Linux"
+  windows <- Sys.info()['sysname'] == "Windows"
   #shiny app in rstudio view pane
+  Sys.sleep(5)
   rstudioapi::callFun("viewer", "http://localhost:56000")
 }
 #' Query CPU usage from OS
