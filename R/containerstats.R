@@ -64,15 +64,19 @@ runCPUMemoryApp<-function()
   sink()
   
   #run job script
-  
-  jobRunScript(
-    path=paste0(tempdir(),"\\usageAddinsScript.R"),
-    name = "CPU Memory Usage" ,
-    encoding = "unknown",
-    workingDir = NULL,
-    importEnv = TRUE,
-    exportEnv = ""
+  try(
+    {
+      jobRunScript(
+        path=paste0(tempdir(),"\\usageAddinsScript.R"),
+        name = "CPU Memory Usage" ,
+        encoding = "unknown",
+        workingDir = NULL,
+        importEnv = TRUE,
+        exportEnv = ""
+      )
+    }
   )
+
   cat(rstudioapi::isAvailable())
   
   linux <- Sys.info()['sysname'] == "Linux"
